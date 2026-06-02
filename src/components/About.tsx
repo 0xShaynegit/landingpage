@@ -6,6 +6,14 @@ import AnimatedLetter from './AnimatedLetter'
 const BODY_TEXT =
   'Over the last seven years, I have worked with Parallax, a Berlin-based production house that crafts cinema, series, and Noir Studio in Paris. Together, we have created work that has earned international acclaim at several major festivals.'
 
+const pills = ['Color grading', 'Visual effects', 'Narrative design', 'Cinematography']
+
+const awards = [
+  { fest: 'Sundance', year: '2024' },
+  { fest: 'TIFF', year: '2023' },
+  { fest: 'Cannes', year: '2024' },
+]
+
 export default function About() {
   const bodyRef = useRef<HTMLParagraphElement>(null)
   const { scrollYProgress } = useScroll({
@@ -38,10 +46,22 @@ export default function About() {
           />
         </div>
 
+        {/* Skill pills */}
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
+          {pills.map((p) => (
+            <span
+              key={p}
+              className="px-4 py-1.5 rounded-full border border-white/10 text-gray-400 text-xs"
+            >
+              {p}
+            </span>
+          ))}
+        </div>
+
         {/* Scroll-linked character opacity paragraph */}
         <p
           ref={bodyRef}
-          className="text-xs sm:text-sm md:text-base max-w-2xl mx-auto"
+          className="text-xs sm:text-sm md:text-base max-w-2xl mx-auto mb-10"
           style={{ color: '#DEDBC8', lineHeight: 1.6 }}
         >
           {chars.map((char, i) => (
@@ -53,6 +73,20 @@ export default function About() {
             />
           ))}
         </p>
+
+        {/* Awards */}
+        <div className="flex flex-wrap justify-center gap-4">
+          {awards.map((a) => (
+            <div
+              key={a.fest}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-primary/60" />
+              <span className="text-gray-400 text-xs">{a.fest}</span>
+              <span className="text-gray-600 text-xs">{a.year}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
